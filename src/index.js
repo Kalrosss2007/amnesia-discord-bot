@@ -1,4 +1,21 @@
 require("dotenv").config();
+
+const http = require("http");
+
+const PORT = process.env.PORT || 3000;
+
+http.createServer((req, res) => {
+  if (req.url === "/healthz") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    return res.end("ok");
+  }
+
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("running");
+}).listen(PORT, () => {
+  console.log("🌐 health server listening on", PORT);
+});
+
 const http = require("http");
 
 const PORT = process.env.PORT || 3000;
@@ -134,4 +151,5 @@ client.on("interactionCreate", async (interaction) => {
 
 // ---------- LOGIN ----------
 client.login(process.env.DISCORD_TOKEN);
+
 
